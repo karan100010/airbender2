@@ -82,13 +82,18 @@ def split_data(air_data):
         data["pm_b"]=pm_b
         data["pm_c"]=pm_c
         data["pm_d"]=pm_d
+        data["pm_e"]=pm_e
         data["pm_f"]=pm_f
 
     else:
         try:
-            data["date_time"]=[air_data["GATEWAY_ID"]["DT"]["@V"]]
+            data["id"]=air_data["GATEWAY_ID"]["@V"]
         except:
-            data["date_time"]=""    
+            data["id"]=""
+        try:
+            data["datetime"]=[air_data["GATEWAY_ID"]["DT"]["@V"]]
+        except:
+            data["datetime"]=""    
 
         try:
             data["humidity"]=[air_data["GATEWAY_ID"]["DT"]["AT"]["@R"]]
