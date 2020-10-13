@@ -157,16 +157,18 @@ def write_to_gsheets(gd_key,df):
 
 app = Flask(__name__)
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/") 
+def home_view(): 
+        return "<h1>the app is working</h1>"
+
+@app.route("/post", methods=['GET', 'POST'])
 def parse_xml():
     xml_data = request.data
     content_dict = xmltodict.parse(xml_data)
     write_to_gsheets("gd_key.json",pandas.DataFrame(split_data(content_dict)))
     return jsonify(split_data(content_dict))
 #x=parse_xml()
-if __name__ == '__main__':
-    print("Starting python app")
-    app.run(host='0.0.0.0', port=8080)
+
 
 
 
