@@ -165,7 +165,7 @@ def home_view():
 def parse_xml():
     xml_data = request.data
     content_dict = xmltodict.parse(xml_data)
-    write_to_gsheets("gd_key.json",pandas.DataFrame(split_data(content_dict)))
+    write_to_gsheets("app/gd_key.json",pandas.DataFrame(split_data(content_dict)))
     return jsonify(split_data(content_dict))
 #x=parse_xml()
 
