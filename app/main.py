@@ -84,7 +84,8 @@ def split_data(air_data):
         data["pm_d"]=pm_d
         data["pm_e"]=pm_e
         data["pm_f"]=pm_f
-
+        data["status"]="sucess"
+        print(str(data["id"])+" device has send data on "+str(data["datetime"][0]))  
     else:
         try:
             data["id"]=air_data["GATEWAY_ID"]["@V"]
@@ -139,7 +140,8 @@ def split_data(air_data):
             data["pm_f"]=[air_data["GATEWAY_ID"]["DT"]["PM"]["@F"]]
         except:
             data["pm_f"]=""
-          
+        data["status"]="sucess"
+        print(data["id"]+" device has send data on "+data["datetime"][0])  
     return data
 
 
@@ -149,6 +151,7 @@ def write_to_gsheets(gd_key,df):
     data_sheet_df=gd.get_as_dataframe(ws)
     data_sheet_df.dropna(how="all",inplace=True)
     data_sheet_df.dropna(how="all",axis=1,inplace=True)
+    df.drop(columns=["status"],axis=1,inplace=True)
     data_sheet_df=data_sheet_df.append(df)
     gd.set_with_dataframe(ws,data_sheet_df)
     print("added data to google sheet")
