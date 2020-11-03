@@ -172,19 +172,19 @@ def parse_xml():
     return jsonify(split_data(content_dict))
 
 @app.route("/post1", methods=['GET', 'POST'])
-def parse_xml():
+def parse_xml1():
     xml_data = request.data
     content_dict = xmltodict.parse(xml_data)
     write_to_gsheets("app/gd_key.json",pandas.DataFrame(split_data(content_dict)))
     return jsonify(split_data(content_dict))
 
 @app.route("/post2", methods=['GET', 'POST'])
-def parse_xml():
+def parse_xml2():
     xml_data = request.data
     content_dict = xmltodict.parse(xml_data)
     write_to_gsheets("app/gd_key.json",pandas.DataFrame(split_data(content_dict)))
     return jsonify(split_data(content_dict))
-#x=parse_xml()
+
 
 
 
