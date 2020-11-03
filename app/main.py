@@ -147,7 +147,7 @@ def split_data(air_data):
 
 def write_to_gsheets(gd_key,df):
     gc = gspread.service_account(gd_key)
-    ws=gc.open("airdata").worksheet("Sheet1")
+    ws=gc.open("testdata").worksheet("Sheet1")
     data_sheet_df=gd.get_as_dataframe(ws)
     data_sheet_df.dropna(how="all",inplace=True)
     data_sheet_df.dropna(how="all",axis=1,inplace=True)
