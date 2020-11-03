@@ -16,4 +16,4 @@ pandas == 0.25.3
 xmltodict == 0.12.
 
 
-gunicorn == 20.0.4
+:
