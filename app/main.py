@@ -153,7 +153,7 @@ def write_to_gsheets(gd_key,df):
     data_sheet_df.dropna(how="all",axis=1,inplace=True)
     #df.drop(columns=["status"],axis=1,inplace=True)
     del df["status"]
-    data_sheet_df=data_sheet_df.append(df)
+    data_sheet_df=data_sheet_df.append(df,ignore_index=True)
     gd.set_with_dataframe(ws,data_sheet_df)
     print("added data to google sheet")
 
