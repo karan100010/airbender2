@@ -31,7 +31,7 @@ celery = make_celery(app)
 
 #the format prescibesd in the fuction below presrcribes to the pandas Dataframe format which requires the values of all dictnary to be a list for
 #more on this read the pandas documentation for more details
-@celery.task()
+
 def split_data(air_data):
     data={}
     
