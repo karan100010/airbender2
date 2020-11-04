@@ -151,7 +151,8 @@ def write_to_gsheets(gd_key,df):
     data_sheet_df=gd.get_as_dataframe(ws)
     data_sheet_df.dropna(how="all",inplace=True)
     data_sheet_df.dropna(how="all",axis=1,inplace=True)
-    df.drop(columns=["status"],axis=1,inplace=True)
+    #df.drop(columns=["status"],axis=1,inplace=True)
+    del df["status"]
     data_sheet_df=data_sheet_df.append(df)
     gd.set_with_dataframe(ws,data_sheet_df)
     print("added data to google sheet")
@@ -168,7 +169,7 @@ def home_view():
 def parse_xml():
     xml_data = request.data
     content_dict = xmltodict.parse(xml_data)
-    write_to_gsheets("app/gd_key.json",pandas.DataFrame(split_data(content_dict)))
+    write_to_gsheets("app/gd_key.json",pandas.split_data(content_dict))
     return jsonify(split_data(content_dict))
 
 @app.route("/post1", methods=['GET', 'POST'])
