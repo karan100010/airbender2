@@ -176,7 +176,8 @@ def split_data(air_data):
     return data
 
 @celery.task()
-def write_to_gsheets(gd_key,df):
+def write_to_gsheets(gd_key,data):
+    df=pandas.DataFrame(data)
     gc = gspread.service_account(gd_key)
     ws=gc.open("testdata").worksheet("Sheet1")
     data_sheet_df=gd.get_as_dataframe(ws)
