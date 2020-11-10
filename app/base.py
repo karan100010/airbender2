@@ -188,7 +188,7 @@ def write_to_gsheets(gd_key,df):
     gd.set_with_dataframe(ws,data_sheet_df)
     print("added data to google sheet")
     sheet=gc.open("testdata")
-    for i in set(df.id):
+    for i in set(df["id"]):
         try:
             sheet.add_worksheet(i,rows="100",cols="1000")
             #time.sleep(5)
