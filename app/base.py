@@ -5,7 +5,7 @@ import gspread
 import gspread_dataframe as gd
 from celery import Celery
 
-
+@celery.task()
 def make_celery(app):
     celery = Celery(
         app.import_name,
