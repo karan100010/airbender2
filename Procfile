@@ -1,1 +1,2 @@
-web: gunicorn -w 8 wsgi:app
+web: gunicorn: wsgi:app
+worker: celery worker --app=base.app
