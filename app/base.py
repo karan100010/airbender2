@@ -27,7 +27,7 @@ app.config.update(
    BROKER_URL=os.environ['REDIS_URL'],
                 CELERY_RESULT_BACKEND=os.environ['REDIS_URL']
 )
-celery = make_celery(app)
+c = make_celery(app)
 
 
 
@@ -175,7 +175,7 @@ def split_data(air_data):
         print(data["id"]+" device has send data on "+data["datetime"][0])  
     return data
 
-@celery.task()
+@c.task()
 def write_to_gsheets(gd_key,data):
     df=pandas.DataFrame(data)
     gc = gspread.service_account(gd_key)
