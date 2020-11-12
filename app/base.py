@@ -4,13 +4,13 @@ import xmltodict
 import gspread
 import gspread_dataframe as gd
 from celery import Celery
+import os
 
 @celery.task()
 def make_celery(app):
     celery = Celery(
-        app.import_name,
-        backend=app.config['CELERY_RESULT_BACKEND'],
-        broker=app.config['CELERY_BROKER_URL']
+      BROKER_URL=os.environ['REDIS_URL'],
+        CELERY_RESULT_BACKEND=os.environ['REDIS_URL']
     )
     celery.conf.update(app.config)
 
@@ -24,8 +24,8 @@ def make_celery(app):
 
 app = Flask(__name__)
 app.config.update(
-    CELERY_BROKER_URL='redis://localhost:6379',
-    CELERY_RESULT_BACKEND='redis://localhost:6379'
+   BROKER_URL=os.environ['REDIS_URL'],
+                CELERY_RESULT_BACKEND=os.environ['REDIS_URL']
 )
 celery = make_celery(app)
 
