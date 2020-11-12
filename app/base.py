@@ -6,7 +6,6 @@ import gspread_dataframe as gd
 from celery import Celery
 import os
 
-@celery.task()
 def make_celery(app):
     celery = Celery(
       BROKER_URL=os.environ['REDIS_URL'],
@@ -27,7 +26,7 @@ app.config.update(
    BROKER_URL=os.environ['REDIS_URL'],
                 CELERY_RESULT_BACKEND=os.environ['REDIS_URL']
 )
-c = make_celery(app)
+celery = make_celery(app)
 
 
 
@@ -175,7 +174,7 @@ def split_data(air_data):
         print(data["id"]+" device has send data on "+data["datetime"][0])  
     return data
 
-@c.task()
+@celery.task()
 def write_to_gsheets(gd_key,data):
     df=pandas.DataFrame(data)
     gc = gspread.service_account(gd_key)
