@@ -187,18 +187,4 @@ def write_to_gsheets(gd_key,data):
     data_sheet_df=data_sheet_df.append(df,ignore_index=True)
     gd.set_with_dataframe(ws,data_sheet_df)
     print("added data to google sheet")
-    sheet=gc.open("testdata")
-    for i in set(df["id"]):
-        try:
-            sheet.add_worksheet(i,rows="100",cols="1000")
-            #time.sleep(5)
-            ws_seg=sheet.worksheet(i)
-        except:
-            ws_seg=sheet.worksheet(i)   
-        data_sheet_seg_df=gd.get_as_dataframe(ws_seg)
-        data_sheet_seg_df.dropna(how="all",inplace=True)
-        data_sheet_seg_df.dropna(how="all",axis=1,inplace=True)
-        data_sheet_seg_df.append(df.loc[df.id==i])
-        ap_seg_df=data_sheet_seg_df.append(df.loc[df.id==i])
-        gd.set_with_dataframe(ws_seg,ap_seg_df)
-
+  
