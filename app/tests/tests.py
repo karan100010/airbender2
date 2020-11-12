@@ -12,7 +12,7 @@ async def fetch(session, url):
 async def main():
     base_url = "https://agile-depths-18594.herokuapp.com/post"
     
-    urls=[base_url for i in range(7)]
+    urls=[base_url for i in range(6)]
     
     tasks = []
     async with aiohttp.ClientSession(trust_env=True) as session:
