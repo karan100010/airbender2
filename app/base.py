@@ -6,7 +6,6 @@ import gspread_dataframe as gd
 from celery import Celery
 import os
 
-@celery.task()
 def make_celery(app):
     celery = Celery(
       BROKER_URL=os.environ['REDIS_URL'],
