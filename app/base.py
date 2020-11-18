@@ -24,8 +24,8 @@ def make_celery(app):
 
 app = Flask(__name__)
 app.config.update(
-   BROKER_URL=os.environ['REDIS_URL'],
-                CELERY_RESULT_BACKEND=os.environ['REDIS_URL']
+   BROKER_URL=['redis://localhost:6379'],
+                CELERY_RESULT_BACKEND=['redis://localhost:6379']
 )
 celery = make_celery(app)
 
