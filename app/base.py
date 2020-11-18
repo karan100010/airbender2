@@ -4,12 +4,12 @@ import xmltodict
 import gspread
 import gspread_dataframe as gd
 from celery import Celery
-import os
+
 
 def make_celery(app):
     celery = Celery(
-      BROKER_URL=os.environ['REDIS_URL'],
-        CELERY_RESULT_BACKEND=os.environ['REDIS_URL'],
+      BROKER_URL=['redis://localhost:6379'],
+        CELERY_RESULT_BACKEND=['redis://localhost:6379'],
         broker_pool_limit=0
     )
     celery.conf.update(app.config)
