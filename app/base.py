@@ -179,7 +179,7 @@ def split_data(air_data):
 def write_to_gsheets(gd_key,data):
     df=pandas.DataFrame(data)
     gc = gspread.service_account(gd_key)
-    ws=gc.open("testdata").worksheet("Sheet1")
+    ws=gc.open("airdata_new").worksheet("Sheet1")
     data_sheet_df=gd.get_as_dataframe(ws)
     data_sheet_df.dropna(how="all",inplace=True)
     data_sheet_df.dropna(how="all",axis=1,inplace=True)
@@ -188,7 +188,7 @@ def write_to_gsheets(gd_key,data):
     data_sheet_df=data_sheet_df.append(df,ignore_index=True)
     gd.set_with_dataframe(ws,data_sheet_df)
     print("added data to google sheet")
-    sheet=gc.open("testdata")
+    sheet=gc.open("airdata_new")
     for i in set(df["id"]):
         try:
             sheet.add_worksheet(i,rows="100",cols="1000")
@@ -202,4 +202,5 @@ def write_to_gsheets(gd_key,data):
         data_sheet_seg_df.append(df.loc[df.id==i])
         ap_seg_df=data_sheet_seg_df.append(df.loc[df.id==i])
         gd.set_with_dataframe(ws_seg,ap_seg_df)
+        print("data segrigated entry made in "+str(df["id"]))
 
