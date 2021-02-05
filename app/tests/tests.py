@@ -10,7 +10,7 @@ async def fetch(session, url):
         return await response.text()
 
 async def main():
-    base_url = "https://agile-depths-18594.herokuapp.com/post"
+    base_url = "http://18.189.189.178:8080/post"
     
     urls=[base_url for i in range(6)]
     
