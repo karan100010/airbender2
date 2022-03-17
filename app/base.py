@@ -215,6 +215,7 @@ def sql_login(config_file):
     host=config["sql"]["host"]
     database=config["sql"]["database"]
     engine=create_engine("mysql+pymysql://{}:{}@{}/{}".format(user,password,host,database))
+    return engine
 
     
 @celery.task()
