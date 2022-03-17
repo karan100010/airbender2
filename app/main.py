@@ -15,9 +15,11 @@ def home_view():
 
 @app.route("/post", methods=['GET', 'POST'])
 def parse_xml():
+    engine=create_engine("../login.conf")
     xml_data = request.data
     content_dict = xmltodict.parse(xml_data)
-    write_to_gsheets.delay("app/gd_key.json",split_data(content_dict))
+   # write_to_gsheets.delay("app/gd_key.json",split_data(content_dict))
+    write_to_db.delay(split_data(content_dict))
     return jsonify(split_data(content_dict))
 
 

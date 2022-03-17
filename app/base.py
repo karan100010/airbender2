@@ -4,6 +4,8 @@ import xmltodict
 import gspread
 import gspread_dataframe as gd
 from celery import Celery
+import configparser
+from sqlalchemy import create_engine
 
 
 def make_celery(app):
@@ -204,3 +206,25 @@ def write_to_gsheets(gd_key,data):
         gd.set_with_dataframe(ws_seg,ap_seg_df)
         print("data segrigated entry made in "+str(df["id"]))
 
+def sql_login(config_file):
+    
+    config=configparser.ConfigParser()
+    config.read(config_file)
+    user=config["sql"]["user"]
+    password=config["sql"]["password"]
+    host=config["sql"]["host"]
+    database=config["sql"]["database"]
+    engine=create_engine("mysql+pymysql://{}:{}@{}/{}".format(user,password,host,database))
+
+    
+@celery.task()
+#write the attributes retrternd in the split_data function to a mysql database youing a sqlachchemy engine
+def write_to_db(engine,data):
+    try:
+        df=pandas.DataFrame(data)
+        df.to_sql("airdata",engine,if_exists="append",index=False)
+        print("data written to database")
+    except:
+        print("error in writing to database")
+    
+    
