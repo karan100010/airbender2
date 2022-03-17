@@ -22,6 +22,14 @@ def parse_xml():
     write_to_db.delay(engine,split_data(content_dict))
     return jsonify(split_data(content_dict))
 
+#wite a fution for get request
+
+@app.route("/get", methods=['GET'])
+def get_data():
+        engine=sql_login("/home/ubuntu/airbender2/login.conf")
+        data=get_from_db(engine)
+        return jsonify(data)    
+
 
 
 

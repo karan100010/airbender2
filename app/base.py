@@ -227,4 +227,15 @@ def write_to_db(engine,data):
     except:
         print("error in writing to database")
     
+ #write the get from db function to get all the data from the database in json format with a list of dictionaries
+
+def get_from_db(engine):
+    try:
+        df=pandas.read_sql("select * from airdata",engine)
+        data=df.to_dict("records")
+        return data
+    except:
+        print("error in getting data from database")
+
+
     
