@@ -218,7 +218,7 @@ def sql_login(config_file):
     return engine
 
     
-@celery.task()
+#@celery.task()
 #write the attributes retrternd in the split_data function to a mysql database youing a sqlachchemy engine
 def write_to_db(engine,data):
     try:
