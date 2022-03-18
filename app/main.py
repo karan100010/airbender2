@@ -19,7 +19,7 @@ def parse_xml():
     xml_data = request.data
     content_dict = xmltodict.parse(xml_data)
    # write_to_gsheets.delay("app/gd_key.json",split_data(content_dict))
-    write_to_db.delay(engine,split_data(content_dict))
+    write_to_db(engine,split_data(content_dict))
     return jsonify(split_data(content_dict))
 
 #wite a fution for get request
