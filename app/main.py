@@ -31,7 +31,11 @@ def get_data():
         return jsonify(data)    
 
 
-
+@app.route("/delete_all", methods=['GET'])
+def delete_all():
+        engine=sql_login("/home/ubuntu/airbender2/login.conf")
+        clear_db(engine)
+        return jsonify("all data deleted")
 
 
 

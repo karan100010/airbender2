@@ -239,4 +239,10 @@ def get_from_db(engine):
         print("error in getting data from database")
 
 
-    
+#given a database clear all the data in the database
+def clear_db(engine):
+    try:
+        engine.execute("delete from airdata")
+        print("database cleared")
+    except:
+        print("error in clearing database")    
