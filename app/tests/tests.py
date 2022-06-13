@@ -12,7 +12,7 @@ async def fetch(session, url):
 async def main():
     base_url = "http://3.111.147.78:8080/post"
     
-    urls=[base_url for i in range(6)]
+    urls=[base_url for i in range(100)]
     
     tasks = []
     async with aiohttp.ClientSession(trust_env=True) as session:

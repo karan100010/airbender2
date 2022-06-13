@@ -1,3 +1,4 @@
+from distutils.log import error
 import pandas
 from flask import Flask, jsonify, request
 import xmltodict
@@ -225,8 +226,11 @@ def write_to_db(engine,data):
         df=pandas.DataFrame(data)
         df.to_sql("airdata",engine,if_exists="append",index=False)
         print("data written to database")
-    except:
-        print("error in writing to database")
+    #print error in except block
+    except Exception as e: print(e)
+
+
+
     
  #write the get from db function to get all the data from the database in json format with a list of dictionaries
 
